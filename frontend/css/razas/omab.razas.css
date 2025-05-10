@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f0f2f5;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contenedor {
+  background-color: #1e3264;
+  color: white;
+  width: 100%;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cabecera */
+h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  color: white;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  font-weight: 500;
+  font-size: 1.1rem;
+}
+
+input[type="text"] {
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 1rem;
+}
+
+.btn-agregar {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: none;
+}
+
+.btn-agregar:hover {
+  background-color: #3e8e41;
+}
+
+.lista-razas {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.lista-razas li {
+  background-color: #fff;
+  color: #000;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nombre-raza {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.btn-acciones {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.btn-acciones button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.btn-acciones button:hover {
+  background-color: #f0f0f0;
+}
+
+.btn-acciones button img {
+  width: 22px;
+  height: 22px;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+
+.btn-acciones button:hover img {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 1.5rem 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  form {
+    gap: 0.8rem;
+  }
+  
+  input[type="text"] {
+    padding: 0.7rem;
+  }
+  
+  .btn-agregar {
+    max-width: 100%;
+    padding: 0.8rem;
+  }
+  
+  .lista-razas li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .btn-acciones {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}
+
+/* Para pantallas muy grandes (más de 1200px) */
+@media (min-width: 1200px) {
+  .contenedor {
+    padding: 3rem;
+  }
+  
+  .lista-razas li {
+    padding: 1.2rem 2rem;
+  }
+}
