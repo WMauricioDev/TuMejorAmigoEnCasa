@@ -3,23 +3,23 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 
 
-import routerRaza from './routers/OMAB_razaRouter.js';
-import routerCategoria from './routers/OMAB_CategoriaRouter.js';
-import routerMascota from './routers/OMAB_MascotaRouter.js';
-import routerUsuario from './routers/OMAB_usuarioRouter.js';
-import routerGenero from './routers/OMAB_GeneroRouter.js';
-import router from './routers/OMAB_authRouter.js';
+import omab_routerRaza from './routers/OMAB_razaRouter.js';
+import omab_routerCategoria from './routers/OMAB_CategoriaRouter.js';
+import omab_routerMascota from './routers/OMAB_MascotaRouter.js';
+import omab_routerUsuario from './routers/OMAB_usuarioRouter.js';
+import omab_routerGenero from './routers/OMAB_GeneroRouter.js';
+import omab_routerAuth from './routers/OMAB_authRouter.js';
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use('/', routerGenero)
-app.use('/',routerRaza)
-app.use('/', routerCategoria)
-app.use('/', routerMascota)
-app.use('/', routerUsuario)
-app.use('/', router)
+app.use('/', omab_routerGenero)
+app.use('/',omab_routerRaza)
+app.use('/', omab_routerCategoria)
+app.use('/', omab_routerMascota)
+app.use('/', omab_routerUsuario)
+app.use('/', omab_routerAuth)
 
 
-app.listen(3000, '0.0.0.0', () => console.log('Servidor corriendo en 0.0.0.0:3000'));
+app.listen(3000, () => console.log('Servidor corriendo'));

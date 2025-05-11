@@ -2,28 +2,9 @@ import omab_prisma from '../config/prisma.js';
  
 export const omab_postMascota = async (req, res) => {
     try {
-      const {
-        nombre,
-        categoria_id,
-        usuario_id,
-        raza_id,
-        genero_id,
-        estado
-      } = req.body;
-  
-      const foto = req.file ? req.file.filename : 'mascota.jpg';
-  
-      const omab_mascota = await omab_prisma.mascotas.create({
-        data: {
-          nombre,
-          categoria_id: parseInt(categoria_id),
-          usuario_id: parseInt(usuario_id),
-          raza_id: parseInt(raza_id),
-          genero_id: parseInt(genero_id),
-          estado: estado || 'Disponible',
-          foto
-        }
-      });
+        const omab_mascota = await omab_prisma.mascotas.create({
+            data:req.body
+        })
   
       res.status(200).json({ message: "Mascota creada exitosamente", omab_mascota });
     } catch (error) {

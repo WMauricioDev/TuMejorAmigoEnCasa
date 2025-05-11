@@ -58,23 +58,25 @@ input[type="text"] {
 }
 
 .btn-agregar {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 0.8rem;
-  border-radius: 0.5rem;
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 1rem;
-  margin-top: 0.5rem;
-  transition: background-color 0.3s;
-  width: 100%;
-  max-width: none;
+  background: none;         /* Quitar color de fondo */
+  border: none;             /* Eliminar bordes */
+  padding: 0;               /* Quitar el padding */
+  cursor: pointer;         /* Mantener el cursor como puntero */
+  width: auto;              /* Ancho automático */
 }
 
-.btn-agregar:hover {
-  background-color: #3e8e41;
+/* Asegurarse de que la imagen ocupe un tamaño adecuado */
+.btn-agregar img {
+  width: 550px;              /* Ajustar tamaño de la imagen */
+  height: auto;             /* Mantener proporciones */
+  display: block;           /* Eliminar márgenes de imagen */
+  margin: 0 auto;           /* Centrar la imagen si es necesario */
 }
+.btn-agregar img:hover {
+  opacity: 0.8;  /* Cambiar la opacidad al pasar el mouse */
+  transition: opacity 0.3s ease; /* Transición suave */
+}
+
 
 .lista-razas {
   list-style: none;

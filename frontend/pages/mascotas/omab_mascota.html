@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de mascotas</title>
+    <link rel="stylesheet" href="../../css/mascotas/omab_mascotas.css">
+</head>
+  
+<body data-page="raza">
+  <div class="contenedor">
+    <header class="cabecera">
+      <h2>Administrar Mascotas</h2>
+    </header>
+    
+    <button id="btnAgregar" type="button" class="btn-agregar">
+      <img src="../../assets/btn-add.svg" alt="Adicionar">
+    </button><br><br>
+
+    <ul id="listaMascotas" class="lista-mascotas">
+    </ul>
+  </div>
+
+  <script type="module" src="../../js/mascotas/omab_api.js"></script>
+  <script type="module" src="../../js/mascotas/omab_mascota.js"></script>
+</body>
+</html>
