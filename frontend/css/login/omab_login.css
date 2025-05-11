@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('../../assets/bg-login.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+.contenedor{
+    display: flex;
+    height: 160vh;
+    justify-content: center;
+    align-items: center;
+}
+input {
+  background-color: rgba(255, 255, 255, 0.5); 
+  width: 300px;    
+  height: 50px;       
+  padding: 10px 15px; 
+  border: none;      
+  border-radius: 25px;
+  font-size: 16px;    
+  box-sizing: border-box; 
+}
+input::placeholder {
+  color: rgba(15, 12, 165, 0.7); 
+}
+.btn-login{
+  background-color: rgba(37, 5, 126);
+  color: white;
+  width: 300px;     
+  height: 50px;      
+  padding: 10px 15px; 
+  border: none;       
+  border-radius: 25px; 
+  font-size: 16px;    
+  box-sizing: border-box; 
+}
+@media (min-width: 768px) {
+  body {
+    background-size: contain;
+  }
+}
+
