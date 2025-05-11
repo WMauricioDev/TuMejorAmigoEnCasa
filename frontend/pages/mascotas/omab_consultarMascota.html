@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultar Mascota</title>
+    <link rel="stylesheet" href="../../css/mascotas/omab_consultarmascota.css">
+    <link rel="stylesheet" href="../../css/componentes/omab_sidebar.css">
+</head>
+  
+<body data-page="mascota">
+  <div class="contenedor">
+    <header class="cabecera">
+      <h2>Información de Mascota</h2>
+    </header>
+<button id="toggleBtn">
+  <img src="../../assets/btn-back.svg" alt="Menú" width="24" height="24">
+</button>
+<div id="sidebar-container"></div>
+
+    
+    <form id="formMascota" class="formulario-mascota">
+      <div class="campo-formulario">
+        <div class="campo-imagen">
+          <label class="etiqueta-imagen">
+            <div class="preview-imagen" id="previewImagen">
+              <img src="../../assets/icon-camera.svg" alt="Foto de mascota" class="icono-camara">
+            </div>
+          </label>
+        </div>
+      </div>  
+      
+    <div class="detalles-mascota">
+  <div class="campo-visualizacion">
+    <div class="contenedor-info">
+      <img src="../../assets/info-name.svg" alt="Icono nombre" class="icono-info">
+      <div class="valor-info" id="nombreView">Firulais</div>
+    </div>
+  </div>
+
+  <div class="campo-visualizacion">
+    <div class="contenedor-info">
+      <img src="../../assets/info-race.svg" alt="Icono raza" class="icono-info">
+      <div class="valor-info" id="razaView">Labrador</div>
+    </div>
+  </div>
+
+  <div class="campo-visualizacion">
+    <div class="contenedor-info">
+      <img src="../../assets/info-category.svg" alt="Icono categoría" class="icono-info">
+      <div class="valor-info" id="categoriaView">Canino</div>
+    </div>
+  </div>
+
+  <div class="campo-visualizacion">
+    <div class="contenedor-info">
+      <img src="../../assets/info-gender.svg" alt="Icono género" class="icono-info">
+      <div class="valor-info" id="generoView">Macho</div>
+    </div>
+  </div>
+</div>
+
+    </form>
+  </div>
+
+  <script type="module" src="../../js/mascotas/omab_api.js"></script>
+  <script type="module" src="../../js/mascotas/omab_consultarmascota.js"></script>
+  <script type="module" src="../../js/components/omab_sidebar.js"></script>
+</body>
+</html>

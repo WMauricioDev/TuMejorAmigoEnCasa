@@ -21,5 +21,6 @@ app.use('/', omab_routerMascota)
 app.use('/', omab_routerUsuario)
 app.use('/', omab_routerAuth)
 
+app.use('/media', express.static('src/media'));
 
 app.listen(3000, () => console.log('Servidor corriendo'));

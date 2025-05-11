@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de mascotas</title>
     <link rel="stylesheet" href="../../css/mascotas/omab_mascotas.css">
+    <link rel="stylesheet" href="../../css/componentes/omab_sidebar.css">
+
+
 </head>
   
 <body data-page="raza">
+<button id="toggleBtn">
+  <img src="../../assets/btn-back.svg" alt="Menú" width="24" height="24">
+</button>
+<div id="sidebar-container"></div>
   <div class="contenedor">
     <header class="cabecera">
       <h2>Administrar Mascotas</h2>
@@ -23,5 +30,7 @@
 
   <script type="module" src="../../js/mascotas/omab_api.js"></script>
   <script type="module" src="../../js/mascotas/omab_mascota.js"></script>
+  <script type="module" src="../../js/components/omab_sidebar.js"></script>
+
 </body>
 </html>

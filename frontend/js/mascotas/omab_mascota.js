@@ -1,4 +1,4 @@
-import { omab_ObtenerMascotas } from "./omab_api.js";
+import { omab_ObtenerMascotas, omab_EliminarMascota } from "./omab_api.js";
 
 document.addEventListener('DOMContentLoaded', async function() {
   await cargarMascotas();
@@ -25,13 +25,16 @@ async function cargarMascotas() {
       li.className = 'mascota-item';
       li.innerHTML = `
         <div class="mascota-info">
-          <img src="${mascota.imagen || '../../assets/photo-sm-1.svg'}" alt="${mascota.nombre}" class="mascota-imagen">
-          <div class="mascota-datos">
+        <img src="${mascota.foto ? 'http://localhost:3000' + mascota.foto : '../../assets/photo-sm-1.svg'}" alt="${mascota.nombre}" class="mascota-imagen">         
+         <div class="mascota-datos">
             <h3 class="mascota-nombre">${mascota.nombre || 'Sin nombre'}</h3>
             <p class="mascota-raza">${mascota.raza_id || 'Sin raza especificada'}</p>
           </div>
         </div>
         <div class="mascota-acciones">
+         <button class="btn-accion buscar" data-id="${mascota.id}" aria-label="Buscar">
+            <img src="../../assets/btn-show.svg" alt="Buscar">
+          </button>
           <button class="btn-accion editar" data-id="${mascota.id}" aria-label="Editar">
             <img src="../../assets/btn-edit.svg" alt="Editar">
           </button>
@@ -43,7 +46,9 @@ async function cargarMascotas() {
       
       listaMascotas.appendChild(li);
     });
-    
+    document.querySelectorAll('.buscar').forEach(btn => {
+      btn.addEventListener('click', omab_buscarMascota);
+    });
     document.querySelectorAll('.editar').forEach(btn => {
       btn.addEventListener('click', editarMascota);
     });
@@ -57,7 +62,10 @@ async function cargarMascotas() {
     document.getElementById('listaMascotas').innerHTML = '<li class="error-mascotas">Error al cargar las mascotas</li>';
   }
 }
-
+async function omab_buscarMascota(event) {
+  const id = event.currentTarget.getAttribute('data-id');
+  window.location.href = `omab_consultarMascota.html?id=${id}`;
+}
 async function editarMascota(event) {
   const id = event.currentTarget.getAttribute('data-id');
   window.location.href = `editar_mascota.html?id=${id}`;

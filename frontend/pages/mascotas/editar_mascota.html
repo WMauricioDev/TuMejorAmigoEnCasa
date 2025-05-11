@@ -1,11 +1,70 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Modificar Mascota</title>
+    <link rel="stylesheet" href="../../css/mascotas/omab_crearmascotas.css">
 </head>
-<body>
-    <h1>editar</h1>
+  
+<body data-page="mascota">
+  <div class="contenedor">
+    <header class="cabecera">
+      <h2>Modificar Mascota</h2>
+    </header>
+    
+    <form id="formMascota" class="formulario-mascota">
+       <div class="campo-formulario">
+        <div class="campo-imagen">
+          <label for="imagenMascota" class="etiqueta-imagen">
+            <div class="preview-imagen" id="previewImagen">
+              <img src="../../assets/icon-camera.svg" alt="Foto de mascota" class="icono-camara">
+            </div>
+            <span>Subir Foto</span>
+            <input type="file" id="imagenMascota" name="imagen" accept="image/*" style="display: none;">
+          </label>
+        </div>
+      </div>  
+      <div class="campo-formulario">
+        <input type="text" id="nombre" name="nombre" placeholder="Nombre de la mascota" required>
+      </div>
+      
+      <div class="campo-formulario">
+        <div class="select-contenedor">
+          <select id="raza" name="raza_id" required>
+            <option value="" disabled selected>Seleccione Raza...</option>
+          </select>
+          <img src="../../assets/arrows.svg" alt="Desplegar" class="icono-select">
+        </div>
+      </div>
+      
+      <div class="campo-formulario">
+        <div class="select-contenedor">
+          <select id="categoria" name="categoria_id" required>
+            <option value="" disabled selected>Seleccione Categoria...</option>
+          </select>
+          <img src="../../assets/arrows.svg" alt="Desplegar" class="icono-select">
+        </div>
+      </div>
+      
+      
+      
+      <div class="campo-formulario">
+        <div class="select-contenedor">
+          <select id="genero" name="genero" required>
+            <option value="" disabled selected>Seleccione Genero...</option>
+          </select>
+          <img src="../../assets/arrows.svg" alt="Desplegar" class="icono-select">
+        </div>
+      </div>
+      
+      <div class="boton-guardar">
+        <button type="submit" class="btn-guardar">Guardar</button>
+      </div>
+    </form>
+  </div>
+
+  <script type="module" src="../../js/mascotas/omab_api.js"></script>
+  <script type="module" src="../../js/mascotas/omab_editarmascota.js"></script>
 </body>
 </html>
