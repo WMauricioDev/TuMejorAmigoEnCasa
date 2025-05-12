@@ -1,22 +1,22 @@
-fetch('http://192.168.1.112:3000/reportePorCategoriaGrafica')
-  .then(res => res.json())
-  .then(datos => {
-    console.log(datos);
-    const nombresCategorias = datos.map(item => item.nombre);
-    const cantidades = datos.map(item => item.cantidad);
-    console.log(nombresCategorias, cantidades);
+fetch('http://192.168.1.112:3000/omab_reportePorCategoriaGrafica')
+  .then(omab_res => omab_res.json())
+  .then(omab_datos => {
+    console.log(omab_datos);
+    const omab_nombresCategorias = omab_datos.map(omab_item => omab_item.nombre);
+    const omab_cantidades = omab_datos.map(omab_item => omab_item.cantidad);
+    console.log(omab_nombresCategorias, omab_cantidades);
 
-    const ctx = document.getElementById('graficaMascotas').getContext('2d');
-    const colores = ['#4CAF50', '#2196F3', '#FFC107'].slice(0, nombresCategorias.length);
+    const omab_ctx = document.getElementById('graficaMascotas').getContext('2d');
+    const omab_colores = ['#4CAF50', '#2196F3', '#FFC107'].slice(0, omab_nombresCategorias.length);
 
-    new Chart(ctx, {
+    new Chart(omab_ctx, {
       type: 'bar',
       data: {
-        labels: nombresCategorias,
+        labels: omab_nombresCategorias,
         datasets: [{
           label: 'Cantidad de Mascotas',
-          data: cantidades,
-          backgroundColor: colores,
+          data: omab_cantidades,
+          backgroundColor: omab_colores,
         }]
       },
       options: {
@@ -29,26 +29,26 @@ fetch('http://192.168.1.112:3000/reportePorCategoriaGrafica')
       }
     });
   })
-  .catch(error => console.error('Error al cargar los datos:', error));
+  .catch(omab_error => console.error('Error al cargar los datos:', omab_error));
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('http://192.168.1.112:3000/reporteMascotasDisponibleGrafica')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      const ctx2 = document.getElementById('graficaMascotasDisponibles').getContext('2d');
-      const colores2 = [
+  fetch('http://192.168.1.112:3000/omab_reporteMascotasDisponibleGrafica')
+    .then(omab_res => omab_res.json())
+    .then(omab_data => {
+      console.log(omab_data);
+      const omab_ctx2 = document.getElementById('graficaMascotasDisponibles').getContext('2d');
+      const omab_colores2 = [
         '#FF5733', '#C70039', '#900C3F', '#581845', '#DAF7A6'
-      ].slice(0, data.labels.length);
+      ].slice(0, omab_data.labels.length);
 
-      new Chart(ctx2, {
-        type: 'bar', // Cambiado a tipo 'bar'
+      new Chart(omab_ctx2, {
+        type: 'bar',
         data: {
-          labels: data.labels,
+          labels: omab_data.labels,
           datasets: [{
             label: 'Mascotas Disponibles',
-            data: data.values,
-            backgroundColor: colores2,
+            data: omab_data.values,
+            backgroundColor: omab_colores2,
           }]
         },
         options: {
@@ -61,6 +61,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     })
-    .catch(error => console.error('Error al cargar datos de mascotas disponibles:', error));
+    .catch(omab_error => console.error('Error al cargar datos de mascotas disponibles:', omab_error));
 });
-    

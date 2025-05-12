@@ -1,69 +1,69 @@
 document.addEventListener('DOMContentLoaded', function () {
-  const reporteMascotas = document.getElementById('reporte-mascotas');
-  const reporteCategorias = document.getElementById('reporte-categorias');
+  const omab_reporteMascotas = document.getElementById('reporte-mascotas');
+  const omab_reporteCategorias = document.getElementById('reporte-categorias');
 
-  async function fetchMascotasDisponibles() {
+  async function omab_fetchMascotasDisponibles() {
     try {
-      const response = await fetch('http://192.168.1.112:3000/mascotas-disponibles');
-      if (!response.ok) throw new Error('Error al obtener el reporte de mascotas');
+      const omab_response = await fetch('http://192.168.1.112:3000/omab_mascotas-disponibles');
+      if (!omab_response.ok) throw new Error('Error al obtener el reporte de mascotas');
 
-      const contentType = response.headers.get('content-type');
-      if (contentType.includes('application/pdf')) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        reporteMascotas.innerHTML = `
+      const omab_contentType = omab_response.headers.get('content-type');
+      if (omab_contentType.includes('application/pdf')) {
+        const omab_blob = await omab_response.blob();
+        const omab_url = URL.createObjectURL(omab_blob);
+        omab_reporteMascotas.innerHTML = `
           <div class="pdf-download-container">
             <h2>Reporte de Mascotas Disponibles</h2>
-            <button class="download-btn" onclick="downloadFile('${url}', 'mascotas_disponibles.pdf')">
+            <button class="download-btn" onclick="omab_downloadFile('${omab_url}', 'mascotas_disponibles.pdf')">
               Descargar Reporte Completo
             </button>
           </div>
         `;
       } else {
-        throw new Error(`Tipo de contenido no soportado: ${contentType}`);
+        throw new Error(`Tipo de contenido no soportado: ${omab_contentType}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      reporteMascotas.innerHTML = `<p class="error">${error.message}</p>`;
+      omab_reporteMascotas.innerHTML = `<p class="error">${error.message}</p>`;
     }
   }
 
-  async function fetchCantidadMascotasPorCategoria() {
+  async function omab_fetchCantidadMascotasPorCategoria() {
     try {
-      const response = await fetch('http://192.168.1.112:3000/reportePorCategoria');
-      if (!response.ok) throw new Error('Error al obtener el reporte de categorías');
+      const omab_response = await fetch('http://192.168.1.112:3000/omab_reportePorCategoria');
+      if (!omab_response.ok) throw new Error('Error al obtener el reporte de categorías');
 
-      const contentType = response.headers.get('content-type');
-      if (contentType.includes('application/pdf')) {
-        const blob = await response.blob();
-        const url = URL.createObjectURL(blob);
-        reporteCategorias.innerHTML = `
+      const omab_contentType = omab_response.headers.get('content-type');
+      if (omab_contentType.includes('application/pdf')) {
+        const omab_blob = await omab_response.blob();
+        const omab_url = URL.createObjectURL(omab_blob);
+        omab_reporteCategorias.innerHTML = `
           <div class="pdf-download-container">
             <h2>Reporte: Cantidad de Mascotas por Categoría</h2>
-            <button class="download-btn" onclick="downloadFile('${url}', 'cantidad_mascotas_por_categoria.pdf')">
+            <button class="download-btn" onclick="omab_downloadFile('${omab_url}', 'cantidad_mascotas_por_categoria.pdf')">
               Descargar Reporte por Categoría
             </button>
           </div>
         `;
       } else {
-        throw new Error(`Tipo de contenido no soportado: ${contentType}`);
+        throw new Error(`Tipo de contenido no soportado: ${omab_contentType}`);
       }
     } catch (error) {
       console.error('Error:', error);
-      reporteCategorias.innerHTML = `<p class="error">${error.message}</p>`;
+      omab_reporteCategorias.innerHTML = `<p class="error">${error.message}</p>`;
     }
   }
 
-  window.downloadFile = function (url, filename) {
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 100);
+  window.omab_downloadFile = function (omab_url, omab_filename) {
+    const omab_a = document.createElement('a');
+    omab_a.href = omab_url;
+    omab_a.download = omab_filename;
+    document.body.appendChild(omab_a);
+    omab_a.click();
+    document.body.removeChild(omab_a);
+    setTimeout(() => URL.revokeObjectURL(omab_url), 100);
   };
 
-  fetchMascotasDisponibles();
-  fetchCantidadMascotasPorCategoria();
+  omab_fetchMascotasDisponibles();
+  omab_fetchCantidadMascotasPorCategoria();
 });

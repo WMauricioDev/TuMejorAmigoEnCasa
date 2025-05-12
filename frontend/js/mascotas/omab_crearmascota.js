@@ -4,51 +4,51 @@ import { omab_obtenerGenero } from "../genero/omab_api.js";
 import { omab_obtenerRazas } from "../razas/api.js";
 
 document.addEventListener('DOMContentLoaded', async function() {
-  const form = document.getElementById('formMascota');
-  const imagenInput = document.getElementById('imagenMascota');
-  const previewImagen = document.getElementById('previewImagen');
+  const omab_form = document.getElementById('formMascota');
+  const omab_imagenInput = document.getElementById('imagenMascota');
+  const omab_previewImagen = document.getElementById('previewImagen');
   
-  const selectRaza = document.getElementById('raza');
-  const selectCategoria = document.getElementById('categoria');
-  const selectGenero = document.getElementById('genero');
+  const omab_selectRaza = document.getElementById('raza');
+  const omab_selectCategoria = document.getElementById('categoria');
+  const omab_selectGenero = document.getElementById('genero');
 
-  await cargarOpcionesSelects();
+  await omab_cargarOpcionesSelects();
 
-  imagenInput.addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        previewImagen.innerHTML = `<img src="${e.target.result}" class="imagen-preview" alt="Preview de la mascota">`;
+  omab_imagenInput.addEventListener('change', function(e) {
+    const omab_file = e.target.files[0];
+    if (omab_file) {
+      const omab_reader = new FileReader();
+      omab_reader.onload = function(e) {
+        omab_previewImagen.innerHTML = `<img src="${e.target.result}" class="imagen-preview" alt="Preview de la mascota">`;
       };
-      reader.readAsDataURL(file);
+      omab_reader.readAsDataURL(omab_file);
     }
   });
 
-  form.addEventListener('submit', async function(e) {
+  omab_form.addEventListener('submit', async function(e) {
     e.preventDefault();
     
-    if (!form.nombre.value || !selectRaza.value || !selectCategoria.value || !selectGenero.value) {
+    if (!omab_form.nombre.value || !omab_selectRaza.value || !omab_selectCategoria.value || !omab_selectGenero.value) {
       alert('Por favor complete todos los campos requeridos');
       return;
     }
 
-    const formData = new FormData();
-    formData.append('nombre', form.nombre.value);
-    formData.append('raza_id', selectRaza.value);
-    formData.append('categoria_id', selectCategoria.value);
-    formData.append('genero_id', selectGenero.value);
+    const omab_formData = new FormData();
+    omab_formData.append('nombre', omab_form.nombre.value);
+    omab_formData.append('raza_id', omab_selectRaza.value);
+    omab_formData.append('categoria_id', omab_selectCategoria.value);
+    omab_formData.append('genero_id', omab_selectGenero.value);
     
-    if (imagenInput.files[0]) {
-      formData.append('foto', imagenInput.files[0]);
+    if (omab_imagenInput.files[0]) {
+      omab_formData.append('foto', omab_imagenInput.files[0]);
     }
     
     try {
-      const resultado = await omab_CrearMascota(formData);
-      if (resultado.success) {
+      const omab_resultado = await omab_CrearMascota(omab_formData);
+      if (omab_resultado.success) {
         alert('Mascota registrada con éxito');
       } else {
-        alert('Mensaje: ' + (resultado.message || ''));
+        alert('Mensaje: ' + (omab_resultado.message || ''));
       }
     } catch (error) {
       console.error('Error:', error);
@@ -56,27 +56,27 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
   });
 
-  async function cargarOpcionesSelects() {
+  async function omab_cargarOpcionesSelects() {
     try {
-      const [razas, categorias, generos] = await Promise.all([
+      const [omab_razas, omab_categorias, omab_generos] = await Promise.all([
         omab_obtenerRazas(),
         omab_ObtenerCategorias(),
         omab_obtenerGenero()
       ]);
 
-      razas.forEach(raza => {
-        const option = new Option(raza.nombre, raza.id);
-        selectRaza.add(option);
+      omab_razas.forEach(omab_raza => {
+        const omab_option = new Option(omab_raza.nombre, omab_raza.id);
+        omab_selectRaza.add(omab_option);
       });
 
-      categorias.forEach(categoria => {
-        const option = new Option(categoria.nombre, categoria.id);
-        selectCategoria.add(option);
+      omab_categorias.forEach(omab_categoria => {
+        const omab_option = new Option(omab_categoria.nombre, omab_categoria.id);
+        omab_selectCategoria.add(omab_option);
       });
 
-      generos.forEach(genero => {
-        const option = new Option(genero.nombre, genero.id);
-        selectGenero.add(option);
+      omab_generos.forEach(omab_genero => {
+        const omab_option = new Option(omab_genero.nombre, omab_genero.id);
+        omab_selectGenero.add(omab_option);
       });
 
     } catch (error) {
