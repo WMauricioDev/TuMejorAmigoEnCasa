@@ -1,62 +1,62 @@
-import { obtenerRazas, crearRaza, actualizarRaza, eliminarRaza } from './api.js';
+import { omab_obtenerRazas, omab_crearRaza, omab_actualizarRaza, omab_eliminarRaza } from './api.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
-  const form = document.getElementById('formRaza');
-  const nombre = document.getElementById('nombre');
-  const razaId = document.getElementById('razaId');
-  const lista = document.getElementById('listaRazas');
+  const omab_form = document.getElementById('formRaza');
+  const omab_nombre = document.getElementById('nombre');
+  const omab_razaId = document.getElementById('razaId');
+  const omab_lista = document.getElementById('listaRazas');
 
-  await cargarRazas();
+  await omab_cargarRazas();
 
-  form.addEventListener('submit', async (e) => {
+  omab_form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const data = { nombre: nombre.value };
+    const omab_data = { nombre: omab_nombre.value };
 
-    if (razaId.value) {
-      await actualizarRaza(razaId.value, data);
+    if (omab_razaId.value) {
+      await omab_actualizarRaza(omab_razaId.value, omab_data);
     } else {
-      await crearRaza(data);
+      await omab_crearRaza(omab_data);
     }
 
-    form.reset();
-    razaId.value = '';
-    await cargarRazas();
+    omab_form.reset();
+    omab_razaId.value = '';
+    await omab_cargarRazas();
   });
 
-  async function cargarRazas() {
-    lista.innerHTML = '';
-    const razas = await obtenerRazas();
+  async function omab_cargarRazas() {
+    omab_lista.innerHTML = '';
+    const omab_razas = await omab_obtenerRazas();
 
-    razas.forEach(r => {
-      const li = document.createElement('li');
+    omab_razas.forEach(omab_r => {
+      const omab_li = document.createElement('li');
 
-      const spanNombre = document.createElement('span');
-      spanNombre.textContent = r.nombre;
-      spanNombre.className = 'nombre-raza';
+      const omab_spanNombre = document.createElement('span');
+      omab_spanNombre.textContent = omab_r.nombre;
+      omab_spanNombre.className = 'nombre-raza';
 
-      const acciones = document.createElement('div');
-      acciones.className = 'btn-acciones';
+      const omab_acciones = document.createElement('div');
+      omab_acciones.className = 'btn-acciones';
 
-      const btnEditar = document.createElement('button');
-      btnEditar.innerHTML = `<img src="../../img/edit.png" alt="Editar">`;
-      btnEditar.onclick = () => {
-        nombre.value = r.nombre;
-        razaId.value = r.id;
+      const omab_btnEditar = document.createElement('button');
+      omab_btnEditar.innerHTML = `<img src="../../img/edit.png" alt="Editar">`;
+      omab_btnEditar.onclick = () => {
+        omab_nombre.value = omab_r.nombre;
+        omab_razaId.value = omab_r.id;
       };
 
-      const btnEliminar = document.createElement('button');
-      btnEliminar.innerHTML = `<img src="../../img/delete.png" alt="Eliminar">`;
-      btnEliminar.onclick = async () => {
-        await eliminarRaza(r.id);
-        await cargarRazas();
+      const omab_btnEliminar = document.createElement('button');
+      omab_btnEliminar.innerHTML = `<img src="../../img/delete.png" alt="Eliminar">`;
+      omab_btnEliminar.onclick = async () => {
+        await omab_eliminarRaza(omab_r.id);
+        await omab_cargarRazas();
       };
 
-      acciones.appendChild(btnEditar);
-      acciones.appendChild(btnEliminar);
+      omab_acciones.appendChild(omab_btnEditar);
+      omab_acciones.appendChild(omab_btnEliminar);
 
-      li.appendChild(spanNombre);
-      li.appendChild(acciones);
-      lista.appendChild(li);
+      omab_li.appendChild(omab_spanNombre);
+      omab_li.appendChild(omab_acciones);
+      omab_lista.appendChild(omab_li);
     });
   }
 });

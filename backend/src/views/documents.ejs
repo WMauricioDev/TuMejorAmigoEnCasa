@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Documentacion API - Mauricio Audor</title>
+<body>
+  <center><h1>Documentación de la API - TuMejorAmigoEnCasa</h1></center>
+  <h3>Listar Usuarios</h3>
+<table>
+  <tr><td>Número</td> <td>1</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Listar Usuarios</td></tr>
+  <tr><td>URL</td>  <td>/omab_usuario</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite listar todos los usuarios registrados en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>GET</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Request json</td>  <td></td></tr>
+  <tr><td>Respuesta json</td>  <td>
+    Correcto:
+    status: 200 OK
+    [
+      {   
+        "id": 1,
+        "nombre": "Mauricio",
+        "email": "mauricio.audor@example.com",
+        "password": "hashedpassword123"
+      },
+      {
+        "id": 2,
+        "nombre": "Audor",
+        "email": "audor.mauricio@example.com",
+        "password": "hashedpassword456"
+      }
+    ]
+  <br>
+    Incorrecto:
+    404 Not Found
+    {
+      "error": "Error al obtener los usuarios",
+      "detalles": "Mensaje de error específico"
+    }
+    <br>
+    Error:
+    status: 500 Internal Server Error
+    {
+      "error": "Error en el sistema",
+      "detalles": "Mensaje de error específico"
+    }
+  </td></tr>
+  <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+  <br>
+  <h3>Registrar Usuario</h3>
+  <table>
+  <tr><td>Número</td> <td>2</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Registrar Usuario</td></tr>
+  <tr><td>URL</td>  <td>/omab_usuario</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite registrar un nuevo usuario en la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>POST</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Request json</td> <td>{
+    "nombre": "Mauricio",
+    "email": "mauricio.audor@example.com",
+    "password": "password123"
+  }</td></tr>
+  <tr><td>Respuesta json</td>  <td>
+    Correcto:
+    Status: 201 Created
+    {
+      "message": "Usuario registrado correctamente",
+      "omab_usuarios": {
+        "id": 3,
+        "nombre": "Mauricio",
+        "email": "mauricio.audor@example.com",
+        "password": "hashedpassword123"
+      }
+    }
+  <br>
+  Incorrecto:
+  Status: 500 Internal Server Error
+    {
+      "error": "Error al registrar el usuario",
+      "detalles": "Mensaje de error específico"
+    }
+</td></tr>
+<tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+</table>
+<br>
+<h3>Actualizar Usuario</h3>
+<table>
+  <tr><td>Número</td> <td>3</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Actualizar Usuario</td></tr>
+  <tr><td>URL</td>  <td>/omab_usuario/:id</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite actualizar los datos de un usuario existente</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>PUT</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Request json</td>  <td>{
+    "nombre": "Mauricio Actualizado",
+    "email": "mauricio.audor.nuevo@example.com",
+    "password": "nuevopassword123"
+  }</td></tr>
+  <tr><td>Respuesta json</td>  <td>
+    Correcto:
+    Status: 200 OK
+    {
+      "message": "Usuario actualizado correctamente",
+      "omab_usuario": {
+        "id": 1,
+        "nombre": "Mauricio Actualizado",
+        "email": "mauricio.audor.nuevo@example.com",
+        "password": "hashednuevopassword123"
+      }
+    }
+  <br>
+Incorrecto:
+Status: 500 Internal Server Error
+{
+  "error": "Error al actualizar el usuario",
+  "detalles": "Mensaje de error específico"
+}
+</td></tr>
+<tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+</table>
+<br>
+<h3>Eliminar Usuario</h3>
+<table>
+  <tr><td>Número</td> <td>4</td></tr>
+  <tr><td>Nombre del Servicio</td>  <td>Eliminar Usuario</td></tr>
+  <tr><td>URL</td>  <td>/omab_usuario/:id</td></tr>
+  <tr><td>Descripcion</td>  <td>Permite eliminar un usuario de la base de datos</td></tr>
+  <tr><td>Metodo HTTP</td>  <td>DELETE</td></tr>
+  <tr><td>Header</td>  <td>Token:</td></tr>
+  <tr><td>Request json</td>  <td></td></tr>
+  <tr><td>Respuesta json</td>  <td>
+    Correcto:
+    Status: 200 OK
+    {
+      "message": "Usuario eliminado exitosamente"
+    }
+  <br>
+Incorrecto:
+Status: 500 Internal Server Error
+{
+  "error": "Error al eliminar usuario",
+  "detalles": "Mensaje de error específico"
+}
+</td></tr>
+<tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+</table>
+</body>
+</html>
+
+ <h2>Razas</h2>
+  
+  <h3>Listar Razas</h3>
+  <table>
+    <tr><td>Número</td> <td>1</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Listar Razas</td></tr>
+    <tr><td>URL</td> <td>/omab_raza</td></tr>
+    <tr><td>Descripción</td> <td>Obtiene todas las razas registradas</td></tr>
+    <tr><td>Método HTTP</td> <td>GET</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      status: 200 OK
+      <pre>[
+        {
+          "id": 1,
+          "nombre": "Labrador"
+        },
+        {
+          "id": 2,
+          "nombre": "Pastor Alemán"
+        }
+      ]</pre>
+      Error:
+      status: 500 Internal Server Error
+      <pre>{
+        "error": "Error al obtener razas",
+        "detalles": "Mensaje de error específico"
+      }</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Crear Raza</h3>
+  <table>
+    <tr><td>Número</td> <td>2</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Crear Raza</td></tr>
+    <tr><td>URL</td> <td>/omab_raza</td></tr>
+    <tr><td>Descripción</td> <td>Registra una nueva raza</td></tr>
+    <tr><td>Método HTTP</td> <td>POST</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td><pre>{
+  "nombre": "Golden Retriever"
+}</pre></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Raza creada correctamente",
+  "omab_raza": {
+    "id": 3,
+    "nombre": "Golden Retriever"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al registrar raza",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Actualizar Raza</h3>
+  <table>
+    <tr><td>Número</td> <td>3</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Actualizar Raza</td></tr>
+    <tr><td>URL</td> <td>/omab_raza/:id</td></tr>
+    <tr><td>Descripción</td> <td>Actualiza los datos de una raza existente</td></tr>
+    <tr><td>Método HTTP</td> <td>PUT</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td><pre>{
+  "nombre": "Golden Retriever Modificado"
+}</pre></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Raza actualizada correctamente",
+  "omab_raza": {
+    "id": 3,
+    "nombre": "Golden Retriever Modificado"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al actualizar la raza",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Eliminar Raza</h3>
+  <table>
+    <tr><td>Número</td> <td>4</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Eliminar Raza</td></tr>
+    <tr><td>URL</td> <td>/omab_raza/:id</td></tr>
+    <tr><td>Descripción</td> <td>Elimina una raza existente</td></tr>
+    <tr><td>Método HTTP</td> <td>DELETE</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Raza eliminada correctamente",
+  "omab_raza": {
+    "id": 3,
+    "nombre": "Golden Retriever Modificado"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al eliminar la raza",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h2>Categorías</h2>
+
+  <h3>Listar Categorías</h3>
+  <table>
+    <tr><td>Número</td> <td>1</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Listar Categorías</td></tr>
+    <tr><td>URL</td> <td>/omab_categoria</td></tr>
+    <tr><td>Descripción</td> <td>Obtiene todas las categorías registradas</td></tr>
+    <tr><td>Método HTTP</td> <td>GET</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      status: 200 OK
+      <pre>[
+        {
+          "id": 1,
+          "nombre": "Perros"
+        },
+        {
+          "id": 2,
+          "nombre": "Gatos"
+        }
+      ]</pre>
+      Error:
+      status: 500 Internal Server Error
+      <pre>{
+        "error": "error al obtener categorias",
+        "detalles": "Mensaje de error específico"
+      }</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Crear Categoría</h3>
+  <table>
+    <tr><td>Número</td> <td>2</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Crear Categoría</td></tr>
+    <tr><td>URL</td> <td>/omab_categoria</td></tr>
+    <tr><td>Descripción</td> <td>Registra una nueva categoría</td></tr>
+    <tr><td>Método HTTP</td> <td>POST</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td><pre>{
+  "nombre": "Aves"
+}</pre></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Categoria registrada",
+  "omab_categoria": {
+    "id": 3,
+    "nombre": "Aves"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al registrar categoria",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Actualizar Categoría</h3>
+  <table>
+    <tr><td>Número</td> <td>3</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Actualizar Categoría</td></tr>
+    <tr><td>URL</td> <td>/omab_categoria/:id</td></tr>
+    <tr><td>Descripción</td> <td>Actualiza los datos de una categoría existente</td></tr>
+    <tr><td>Método HTTP</td> <td>PUT</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td><pre>{
+  "nombre": "Aves Domésticas"
+}</pre></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Categoria actualizada correctamente",
+  "omab_categoria": {
+    "id": 3,
+    "nombre": "Aves Domésticas"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al actualizar la categoria",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Eliminar Categoría</h3>
+  <table>
+    <tr><td>Número</td> <td>4</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Eliminar Categoría</td></tr>
+    <tr><td>URL</td> <td>/omab_categoria/:id</td></tr>
+    <tr><td>Descripción</td> <td>Elimina una categoría existente</td></tr>
+    <tr><td>Método HTTP</td> <td>DELETE</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Categoria eliminada correctamente"
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al eliminar categoria",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h2>Géneros</h2>
+
+  <h3>Listar Géneros</h3>
+  <table>
+    <tr><td>Número</td> <td>1</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Listar Géneros</td></tr>
+    <tr><td>URL</td> <td>/omab_genero</td></tr>
+    <tr><td>Descripción</td> <td>Obtiene todos los géneros registrados</td></tr>
+    <tr><td>Método HTTP</td> <td>GET</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      status: 200 OK
+      <pre>[
+        {
+          "id": 1,
+          "nombre": "Macho"
+        },
+        {
+          "id": 2,
+          "nombre": "Hembra"
+        }
+      ]</pre>
+      Error:
+      status: 500 Internal Server Error
+      <pre>{
+        "error": "Error al obtener generos",
+        "detalles": "Mensaje de error específico"
+      }</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Crear Género</h3>
+  <table>
+    <tr><td>Número</td> <td>2</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Crear Género</td></tr>
+    <tr><td>URL</td> <td>/omab_genero</td></tr>
+    <tr><td>Descripción</td> <td>Registra un nuevo género</td></tr>
+    <tr><td>Método HTTP</td> <td>POST</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td><pre>{
+  "nombre": "Indeterminado"
+}</pre></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Genero creado exitosamente"
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al registrar genero",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Actualizar Género</h3>
+  <table>
+    <tr><td>Número</td> <td>3</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Actualizar Género</td></tr>
+    <tr><td>URL</td> <td>/omab_genero/:id</td></tr>
+    <tr><td>Descripción</td> <td>Actualiza los datos de un género existente</td></tr>
+    <tr><td>Método HTTP</td> <td>PUT</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td><pre>{
+  "nombre": "No determinado"
+}</pre></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Genero actualizado"
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al actualizar genero",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+</body>
+</html>
+
+  <h2>Mascotas</h2>
+  
+  <h3>Listar Mascotas</h3>
+  <table>
+    <tr><td>Número</td> <td>1</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Listar Mascotas</td></tr>
+    <tr><td>URL</td> <td>/omab_mascota</td></tr>
+    <tr><td>Descripción</td> <td>Obtiene todas las mascotas registradas</td></tr>
+    <tr><td>Método HTTP</td> <td>GET</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      status: 200 OK
+      <pre>{
+  "message": "Mascota:",
+  "omab_mascota": [
+    {
+      "id": 1,
+      "nombre": "Max",
+      "categoria_id": 1,
+      "usuario_id": 1,
+      "raza_id": 1,
+      "genero_id": 1,
+      "foto": "/media/max.jpg",
+      "estado": "Disponible"
+    },
+    {
+      "id": 2,
+      "nombre": "Luna",
+      "categoria_id": 1,
+      "usuario_id": 1,
+      "raza_id": 2,
+      "genero_id": 2,
+      "foto": "/media/luna.jpg",
+      "estado": "Disponible"
+    }
+  ]
+}</pre>
+      Error:
+      status: 500 Internal Server Error
+      <pre>{
+        "error": "Error al obtener mascotas"
+      }</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Obtener Mascota por ID</h3>
+  <table>
+    <tr><td>Número</td> <td>2</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Obtener Mascota</td></tr>
+    <tr><td>URL</td> <td>/omab_mascota/:id</td></tr>
+    <tr><td>Descripción</td> <td>Obtiene una mascota específica por su ID</td></tr>
+    <tr><td>Método HTTP</td> <td>GET</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      status: 200 OK
+      <pre>{
+  "omab_mascota": {
+    "id": 1,
+    "nombre": "Max",
+    "categoria_id": 1,
+    "usuario_id": 1,
+    "raza_id": 1,
+    "genero_id": 1,
+    "foto": "/media/max.jpg",
+    "estado": "Disponible",
+    "categoria": {
+      "id": 1,
+      "nombre": "Perros"
+    },
+    "raza": {
+      "id": 1,
+      "nombre": "Labrador"
+    }
+  }
+}</pre>
+      Error:
+      status: 404 Not Found
+      <pre>{
+        "error": "Mascota no encontrada"
+      }</pre>
+      <br>
+      status: 500 Internal Server Error
+      <pre>{
+        "error": "Error al obtener la mascota"
+      }</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Crear Mascota</h3>
+  <table>
+    <tr><td>Número</td> <td>3</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Crear Mascota</td></tr>
+    <tr><td>URL</td> <td>/omab_mascota</td></tr>
+    <tr><td>Descripción</td> <td>Registra una nueva mascota</td></tr>
+    <tr><td>Método HTTP</td> <td>POST</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Content-Type</td> <td>multipart/form-data</td></tr>
+    <tr><td>Request form-data</td> <td>
+      <pre>nombre: Max
+categoria_id: 1
+raza_id: 1
+genero_id: 1
+foto: (archivo de imagen)</pre>
+    </td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Mascota creada exitosamente",
+  "omab_mascota": {
+    "id": 3,
+    "nombre": "Max",
+    "categoria_id": 1,
+    "usuario_id": 1,
+    "raza_id": 1,
+    "genero_id": 1,
+    "foto": "/media/max.jpg",
+    "estado": "Disponible"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al registrar mascotas",
+  "detalles": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Actualizar Mascota</h3>
+  <table>
+    <tr><td>Número</td> <td>4</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Actualizar Mascota</td></tr>
+    <tr><td>URL</td> <td>/omab_mascota/:id</td></tr>
+    <tr><td>Descripción</td> <td>Actualiza los datos de una mascota existente</td></tr>
+    <tr><td>Método HTTP</td> <td>PUT</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Content-Type</td> <td>multipart/form-data</td></tr>
+    <tr><td>Request form-data</td> <td>
+      <pre>nombre: Max Actualizado
+categoria_id: 1
+raza_id: 1
+genero_id: 1
+foto: (archivo de imagen opcional)</pre>
+    </td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Mascota actualizada",
+  "omab_mascota": {
+    "id": 1,
+    "nombre": "Max Actualizado",
+    "categoria_id": 1,
+    "usuario_id": 1,
+    "raza_id": 1,
+    "genero_id": 1,
+    "foto": "/media/max-actualizado.jpg",
+    "estado": "Disponible"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al actualizar",
+  "details": "Mensaje de error específico"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <h3>Eliminar Mascota</h3>
+  <table>
+    <tr><td>Número</td> <td>5</td></tr>
+    <tr><td>Nombre del Servicio</td> <td>Eliminar Mascota</td></tr>
+    <tr><td>URL</td> <td>/omab_mascota/:id</td></tr>
+    <tr><td>Descripción</td> <td>Elimina una mascota existente</td></tr>
+    <tr><td>Método HTTP</td> <td>DELETE</td></tr>
+    <tr><td>Header</td> <td>Token:</td></tr>
+    <tr><td>Request json</td> <td></td></tr>
+    <tr><td>Respuesta json</td> <td>
+      Correcto:
+      Status: 200 OK
+      <pre>{
+  "message": "Mascota eliminada exitosamente",
+  "omab_mascota": {
+    "id": 1,
+    "nombre": "Max",
+    "categoria_id": 1,
+    "usuario_id": 1,
+    "raza_id": 1,
+    "genero_id": 1,
+    "foto": "/media/max.jpg",
+    "estado": "Disponible"
+  }
+}</pre>
+      Error:
+      Status: 500 Internal Server Error
+      <pre>{
+  "error": "Error al eliminar mascota"
+}</pre>
+    </td></tr>
+    <tr><td>Programador</td> <td>Mauricio Audor</td></tr>
+  </table>
+
+  <!-- MODELO PRISMA -->
+  <h2>Modelo Prisma</h2>
+  <pre>
+model Mascotas {
+  id           Int        @id @default(autoincrement())
+  nombre       String     @db.VarChar(32)
+  categoria_id Int
+  usuario_id   Int
+  raza_id      Int
+  genero_id    Int
+  foto         String?    @db.VarChar(64)
+  estado       Estado     @default(Disponible)
+  categoria    Categorias @relation(fields: [categoria_id], references: [id]) 
+  usuario      Usuarios   @relation(fields: [usuario_id], references: [id])
+  raza         Raza       @relation(fields: [raza_id], references: [id])
+  genero       Generos    @relation(fields: [genero_id], references: [id])
+}
+
+enum Estado {
+  Disponible
+  Adoptado
+  EnProceso
+}</pre>
+</body>
+</html>

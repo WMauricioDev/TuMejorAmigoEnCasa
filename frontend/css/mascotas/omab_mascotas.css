@@ -24,7 +24,6 @@ body {
   flex-direction: column;
 }
 
-/* Cabecera */
 h2 {
   text-align: center;
   margin-bottom: 1.5rem;
@@ -180,47 +179,67 @@ input[type="text"] {
 
 
 
-@media (max-width: 768px) {
-  .contenedor {
-    padding: 1.5rem 1rem;
+@media (max-width: 480px) {
+  form {
+    padding: 0 1rem;
+    gap: 0.8rem;
   }
-  
-  h2 {
-    font-size: 1.5rem;
-  }
-  
-  .mascota-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 1.25rem;
-  }
-  
-  .mascota-info {
-    width: 100%;
-  }
-  
-  .mascota-acciones {
-    width: 100%;
-    justify-content: flex-end;
-  }
-  
-  .btn-agregar {
-    padding: 0.6rem 1rem;
-    font-size: 0.9rem;
-  }
-}
 
-@media (min-width: 1200px) {
-  .contenedor {
-    padding: 3rem;
+  label {
+    font-size: 1rem;
   }
-  
-  .lista-mascotas {
-    max-width: 900px;
+
+  input[type="text"] {
+    padding: 0.6rem;
+    font-size: 0.95rem;
   }
-  
+
+  .btn-agregar img {
+    width: 100%; 
+    max-width: 300px;
+  }
+
   .mascota-item {
-    padding: 1.75rem 2rem;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  .mascota-imagen {
+    width: 50px;
+    height: 50px;
+  }
+
+  .mascota-info {
+    flex-direction: row; 
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mascota-acciones {
+    display: flex;
+    flex-direction: row; 
+    justify-content: flex-end; 
+    gap: 0.1rem; 
+    flex-wrap: nowrap;
+  }
+
+  .btn-accion {
+    width: 45px;
+    height: 45px;
+    padding: 0.4rem;
+  }
+
+  .btn-accion img {
+    width: 20px;
+    height: 20px;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .contenedor {
+    padding: 1rem;
   }
 }

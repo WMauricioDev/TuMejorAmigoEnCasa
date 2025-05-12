@@ -1,11 +1,11 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://192.168.1.112:3000';
 
-export async function obtenerRazas() {
+export async function omab_obtenerRazas() {
   const res = await fetch(`${API_URL}/omab_raza`);
   return await res.json();
 }
 
-export async function crearRaza(data) {
+export async function omab_crearRaza(data) {
   const res = await fetch(`${API_URL}/omab_raza`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -14,7 +14,7 @@ export async function crearRaza(data) {
   return await res.json();
 }
 
-export async function actualizarRaza(id, data) {
+export async function omab_actualizarRaza(id, data) {
   const res = await fetch(`${API_URL}/omab_raza/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -23,7 +23,7 @@ export async function actualizarRaza(id, data) {
   return await res.json();
 }
 
-export async function eliminarRaza(id) {
+export async function omab_eliminarRaza(id) {
   const res = await fetch(`${API_URL}/omab_raza/${id}`, { method: 'DELETE' });
   return await res.json();
 }

@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Mascota</title>
     <link rel="stylesheet" href="../../css/mascotas/omab_crearmascotas.css">
+    <link rel="stylesheet" href="../../css/componentes/omab_sidebar.css">
+
 </head>
   
 <body data-page="mascota">
@@ -12,6 +14,10 @@
     <header class="cabecera">
       <h2>Adicionar Mascota</h2>
     </header>
+    <button id="toggleBtn">
+      <img src="../../assets/btn-back.svg" alt="Menú" width="24" height="24">
+    </button>
+    <div id="sidebar-container"></div>
     
     <form id="formMascota" class="formulario-mascota">
        <div class="campo-formulario">
@@ -53,8 +59,6 @@
         <div class="select-contenedor">
           <select id="genero" name="genero" required>
             <option value="" disabled selected>Seleccione Genero...</option>
-            <option value="Macho">Macho</option>
-            <option value="Hembra">Hembra</option>
           </select>
           <img src="../../assets/arrows.svg" alt="Desplegar" class="icono-select">
         </div>
@@ -68,5 +72,6 @@
 
   <script type="module" src="../../js/mascotas/omab_api.js"></script>
   <script type="module" src="../../js/mascotas/omab_crearmascota.js"></script>
+  <script type="module" src="../../js/components/omab_sidebar.js"></script>
 </body>
 </html>

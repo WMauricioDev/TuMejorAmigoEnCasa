@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000';
+const API_URL = 'http://192.168.1.112:3000';
 
 export async function omab_ObtenerMascotas() {
   const res = await fetch(`${API_URL}/omab_mascota`);
@@ -10,8 +10,7 @@ export async function omab_ObtenerMascotas() {
 export async function omab_CrearMascota(data) {
   const res = await fetch(`${API_URL}/omab_mascota`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: data
   });
   return await res.json();
 }
@@ -19,8 +18,7 @@ export async function omab_CrearMascota(data) {
 export async function omab_ActualizarMascota(id, data) {
   const res = await fetch(`${API_URL}/omab_mascota/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
+    body: data
   });
   return await res.json();
 }
@@ -30,3 +28,12 @@ export async function omab_EliminarMascota(id) {
   return await res.json();
 }
 
+
+export async function omab_ObtenerMascotaPorId(id) {
+  const res = await fetch(`${API_URL}/omab_mascota/${id}`);
+  if (!res.ok) {
+    throw new Error('Mascota no encontrada');
+  }
+  const data = await res.json();
+  return data.omab_mascota;
+}
