@@ -1,8 +1,8 @@
 import express from 'express';
 import { login } from '../controllers/OMAB_authController.js';
 
-const router = express.Router();
+const omab_RouterAuth = express.Router();
 
-router.post('/auth', login);
+omab_RouterAuth.post('/omab_auth', login);
 
-export default router;
+export default omab_RouterAuth;

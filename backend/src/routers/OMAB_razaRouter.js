@@ -1,11 +1,11 @@
 import express from 'express'
 import { omab_getRaza, omab_postRaza, omab_delteRaza, omab_putRaza} from '../controllers/OMAB_RazaController.js';
 
-const routerRaza = express.Router()
+const omab_routerRaza = express.Router()
 
-routerRaza.get('/raza', omab_getRaza)
-routerRaza.post('/raza', omab_postRaza)
-routerRaza.put('/raza/:id', omab_putRaza)
-routerRaza.delete('/raza/:id', omab_delteRaza)
+omab_routerRaza.get('/omab_raza', omab_getRaza)
+omab_routerRaza.post('/omab_raza', omab_postRaza)
+omab_routerRaza.put('/omab_raza/:id', omab_putRaza)
+omab_routerRaza.delete('/omab_raza/:id', omab_delteRaza)
 
-export default routerRaza
+export default omab_routerRaza

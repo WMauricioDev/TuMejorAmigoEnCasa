@@ -1,0 +1,168 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #1e3264;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contenedor {
+  background-color: #1e3264;
+  color: white;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
+}
+
+.cabecera h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.formulario-mascota {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.campo-formulario {
+  width: 100%;
+  position: relative;
+}
+
+
+
+.select-contenedor {
+  position: relative;
+}
+
+.select-contenedor select {
+  appearance: none;
+  padding-right: 50px;
+}
+
+.icono-select {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  pointer-events: none;
+}
+
+.preview-imagen {
+  width: 150px;
+  height: 150px;
+  border-radius: 70%;
+  background-color: rgba(255, 252, 252, 0.897);
+  border: 6px solid gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 10px auto;
+  overflow: hidden;
+}
+.campo-visualizacion {
+  margin-bottom: 10px;
+}
+
+.contenedor-info {
+  position: relative;
+  display: inline-block;
+}
+
+.icono-info {
+  display: block;
+  width: 350px;
+  height: auto;
+}
+
+.valor-info {
+  position: absolute;
+  top: 50%;
+  left: 140px; 
+  transform: translateY(-50%);
+  color:rgba(37, 5, 126);
+  font-weight: bold;
+  font-size: 16px;
+  pointer-events: none; 
+}
+
+
+.icono-camara {
+  width: 100px;
+ filter: grayscale(100%) brightness(1.5); 
+  opacity: 0.7; 
+}
+
+.etiqueta-imagen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.boton-guardar {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.btn-guardar {
+  background-color: #669103;
+  color: white;
+  width: 100%;
+  height: 60px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 30px;
+  font-size: 18px;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-guardar:hover {
+  background-color: #415c01;
+}
+
+@media (max-width: 480px) {
+  .formulario-mascota {
+    padding: 0 10px;
+  }
+
+  input, select {
+    font-size: 16px;
+    height: 55px;
+  }
+
+  .btn-guardar {
+    height: 55px;
+    font-size: 16px;
+  }
+}
+.input-con-fondo {
+  background-image: url('../../assets/info-name.svg');
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 20px;
+  padding-left: 40px;
+  width: 100%;
+  height: 40px; 
+  border: 1px solid #ccc; 
+  border-radius: 4px;
+}

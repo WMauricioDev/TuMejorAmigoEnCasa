@@ -56,7 +56,7 @@ model Mascotas{
   usuario_id Int
   raza_id Int
   genero_id Int
-  foto String @db.VarChar(64)
+  foto String? @db.VarChar(64)
   estado Estado @default(Disponible)
   categoria Categorias @relation(fields: [categoria_id], references: [id]) 
   usuario   Usuarios   @relation(fields: [usuario_id], references: [id])
