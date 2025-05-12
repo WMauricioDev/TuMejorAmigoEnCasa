@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (!mascotaId) {
     console.error('No se proporcionó ID de mascota');
     alert('No se especificó la mascota a editar');
-    window.location.href = '/omab_mascotas.html';
     return;
   }
 
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   } catch (error) {
     console.error('Error:', error);
     alert('Error al cargar los datos de la mascota');
-    window.location.href = '/omab_mascotas.html';
   }
 });
 
@@ -121,7 +119,6 @@ async function handleFormSubmit(mascotaId) {
     }
     
     alert('Mascota actualizada exitosamente');
-    window.location.href = '/omab_mascotas.html';
     
   } catch (error) {
     console.error('Error:', error);

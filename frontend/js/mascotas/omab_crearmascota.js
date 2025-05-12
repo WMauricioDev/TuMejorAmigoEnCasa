@@ -47,9 +47,8 @@ document.addEventListener('DOMContentLoaded', async function() {
       const resultado = await omab_CrearMascota(formData);
       if (resultado.success) {
         alert('Mascota registrada con éxito');
-        window.location.href = 'omab_mascotas.html';
       } else {
-        alert('Error al registrar la mascota: ' + (resultado.message || ''));
+        alert('Mensaje: ' + (resultado.message || ''));
       }
     } catch (error) {
       console.error('Error:', error);
