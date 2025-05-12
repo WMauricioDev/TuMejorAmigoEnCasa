@@ -32,7 +32,7 @@ export const omab_postMascota = async (req, res) => {
 export const omab_getMascota = async(req,res)=>{
     try {
         const omab_mascota = await omab_prisma.mascotas.findMany()
-        res.status(200).json({message: "Mascota creada exitosamente", omab_mascota})
+        res.status(200).json({message: "Mascota:", omab_mascota})
     } catch (error) {
         res.status(500).json({error: "Error al obtener mascotas"})
     }
@@ -40,17 +40,22 @@ export const omab_getMascota = async(req,res)=>{
 
 export const omab_putMascota = async (req, res) => {
   try {
+
     const omab_mascota = await omab_prisma.mascotas.update({
-      where: {
-        id: parseInt(req.params.id)
-      },
-      data: req.body
+      where: { id: parseInt(req.params.id) },
+      data: {
+        nombre: req.body.nombre,
+        categoria_id: parseInt(req.body.categoria_id),
+        raza_id: parseInt(req.body.raza_id),
+        genero_id: parseInt(req.body.genero_id),
+        foto: req.file ? `/media/${req.file.filename}` : undefined 
+      }
     });
     
-    res.status(200).json({ message: "Mascota actualizada exitosamente", omab_mascota });
+    res.status(200).json({ message: "Mascota actualizada", omab_mascota });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Error al actualizar la mascota" });
+    console.error("Error detallado:", error);
+    res.status(500).json({ error: "Error al actualizar", details: error.message });
   }
 }
 

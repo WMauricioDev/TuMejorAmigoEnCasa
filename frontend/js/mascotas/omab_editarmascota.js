@@ -1,131 +1,160 @@
-import { omab_ActualizarMascota, omab_ObtenerMascotaPorId } from "./omab_api.js";
+import { omab_ObtenerMascotaPorId, omab_ActualizarMascota } from "./omab_api.js";
 import { omab_ObtenerCategorias } from "../categorias/omab_api.js";
 import { omab_obtenerRazas } from "../razas/api.js";
 import { omab_obtenerGenero } from "../genero/omab_api.js";
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const mascotaId = urlParams.get('id');
-  
+
   if (!mascotaId) {
-    alert('No se ha especificado una mascota para editar');
-    window.location.href = 'mascotas.html';
+    console.error('No se proporcionó ID de mascota');
+    alert('No se especificó la mascota a editar');
+    window.location.href = '/omab_mascotas.html';
     return;
   }
 
   try {
-    await cargarSelects();
     const mascota = await omab_ObtenerMascotaPorId(mascotaId);
+    if (!mascota) throw new Error('Mascota no encontrada');
     
-    if (!mascota) {
-      throw new Error('Mascota no encontrada');
-    }
-    
-    autocompletarFormulario(mascota);
-    
-    document.getElementById('formMascota').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      await actualizarMascota(mascotaId);
-    });
-    
-    document.getElementById('imagenMascota').addEventListener('change', function(e) {
-      const file = e.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-          document.getElementById('previewImagen').innerHTML = `
-            <img src="${event.target.result}" alt="Preview" class="imagen-preview">
-          `;
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-    
+    await populateForm(mascota);
+    await loadSelectOptions(mascota);
+
+    setupEventListeners(mascotaId);
+
   } catch (error) {
-    console.error('Error al cargar la página de edición:', error);
-    alert('Error al cargar los datos de la mascota: ' + error.message);
-    window.location.href = 'mascotas.html';
+    console.error('Error:', error);
+    alert('Error al cargar los datos de la mascota');
+    window.location.href = '/omab_mascotas.html';
   }
 });
 
-async function cargarSelects() {
+async function populateForm(mascota) {
+  document.getElementById('nombre').value = mascota.nombre || '';
+  
+  if (mascota.foto) {
+    updateImagePreview(mascota.foto.startsWith('/media/') ? mascota.foto : `/media/${mascota.foto}`);
+  }
+
+  document.getElementById('imagenMascota').addEventListener('change', handleImageChange);
+}
+
+async function loadSelectOptions(mascota) {
   try {
-    const razas = await omab_obtenerRazas();
-    const selectRaza = document.getElementById('raza');
-    
-    razas.forEach(raza => {
-      const option = document.createElement('option');
-      option.value = raza.id;
-      option.textContent = raza.nombre;
-      selectRaza.appendChild(option);
-    });
-    
     const categorias = await omab_ObtenerCategorias();
-    const selectCategoria = document.getElementById('categoria');
+    const categoriaSelect = document.getElementById('categoria');
     
-    categorias.forEach(categoria => {
+    categorias.forEach(cat => {
       const option = document.createElement('option');
-      option.value = categoria.id;
-      option.textContent = categoria.nombre;
-      selectCategoria.appendChild(option);
+      option.value = cat.id;
+      option.textContent = cat.nombre;
+      if (cat.id === mascota.categoria_id) option.selected = true;
+      categoriaSelect.appendChild(option);
     });
-    
+
     const generos = await omab_obtenerGenero();
-    const selectGenero = document.getElementById('genero');
+    const generoSelect = document.getElementById('genero');
     
-    generos.forEach(genero => {
+    generos.forEach(gen => {
       const option = document.createElement('option');
-      option.value = genero.id;
-      option.textContent = genero.nombre;
-      selectGenero.appendChild(option);
+      option.value = gen.id;
+      option.textContent = gen.nombre;
+      if (gen.id === mascota.genero_id) option.selected = true;
+      generoSelect.appendChild(option);
     });
-    
+
+    await updateRazasSelect(mascota.categoria_id, mascota.raza_id);
+
+    document.getElementById('categoria').addEventListener('change', async (e) => {
+      await updateRazasSelect(e.target.value);
+    });
+
   } catch (error) {
-    console.error('Error al cargar los selects:', error);
+    console.error('Error cargando opciones:', error);
     throw error;
   }
 }
 
-function autocompletarFormulario(mascota) {
-  document.getElementById('nombre').value = mascota.nombre || '';
-  document.getElementById('raza').value = mascota.raza_id || '';
-  document.getElementById('categoria').value = mascota.categoria_id || '';
-  document.getElementById('genero').value = mascota.genero || '';
+async function updateRazasSelect(categoriaId, razaIdToSelect = null) {
+  const razaSelect = document.getElementById('raza');
+  razaSelect.innerHTML = '<option value="" disabled selected>Seleccione Raza...</option>';
   
-  if (mascota.foto) {
-    document.getElementById('previewImagen').innerHTML = `
-      <img src="http://localhost:3000${mascota.foto}" alt="Foto actual" class="imagen-preview">
-    `;
+  if (!categoriaId) return;
+  
+  try {
+    const razas = await omab_obtenerRazas(categoriaId);
+    
+    razas.forEach(raz => {
+      const option = document.createElement('option');
+      option.value = raz.id;
+      option.textContent = raz.nombre;
+      if (raz.id === razaIdToSelect) option.selected = true;
+      razaSelect.appendChild(option);
+    });
+  } catch (error) {
+    console.error('Error cargando razas:', error);
   }
 }
 
-async function actualizarMascota(mascotaId) {
+function setupEventListeners(mascotaId) {
+  const form = document.getElementById('formMascota');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await handleFormSubmit(mascotaId);
+  });
+}
+
+async function handleFormSubmit(mascotaId) {
+  const form = document.getElementById('formMascota');
+  const formData = new FormData(form);
+  
   try {
-    const form = document.getElementById('formMascota');
-    const formData = new FormData(form);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Guardando...';
     
-    // Validar campos requeridos
-    if (!formData.get('nombre') || !formData.get('raza_id') || 
-        !formData.get('categoria_id') || !formData.get('genero')) {
-      alert('Por favor complete todos los campos requeridos');
-      return;
+    const result = await omab_ActualizarMascota(mascotaId, formData);
+    
+    if (result.error) {
+      throw new Error(result.error);
     }
     
-    if (!confirm('¿Está seguro de que desea actualizar los datos de esta mascota?')) {
-      return;
-    }
-    
-    const response = await omab_ActualizarMascota(mascotaId, formData);
-    
-    if (response && response.success) {
-      alert('Mascota actualizada correctamente');
-      window.location.href = 'mascotas.html';
-    } else {
-      throw new Error(response.message || 'Error al actualizar la mascota');
-    }
+    alert('Mascota actualizada exitosamente');
+    window.location.href = '/omab_mascotas.html';
     
   } catch (error) {
-    console.error('Error al actualizar mascota:', error);
-    alert('Error al actualizar la mascota: ' + (error.message || 'Por favor intente nuevamente'));
+    console.error('Error:', error);
+    alert(`Error al actualizar la mascota: ${error.message}`);
+    
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Guardar';
   }
+}
+
+function handleImageChange(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = (event) => {
+    updateImagePreview(event.target.result);
+  };
+  reader.readAsDataURL(file);
+}
+
+function updateImagePreview(imageSrc) {
+  const previewImagen = document.getElementById('previewImagen');
+  previewImagen.innerHTML = '';
+  
+  const img = document.createElement('img');
+  img.src = imageSrc;
+  img.alt = 'Foto de la mascota';
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.objectFit = 'cover';
+  img.style.borderRadius = '8px';
+  
+  previewImagen.appendChild(img);
 }

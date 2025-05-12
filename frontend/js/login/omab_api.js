@@ -21,7 +21,7 @@ loginForm.addEventListener('submit', async (event) => {
     if (response.ok) {
       localStorage.setItem('token', data.token);
       alert('Login exitoso')
-      window.location = "omab_listarRaza.html"
+      window.location = "/pages/mascotas/omab_mascota.html";
     } else {
       alert("Credenciales incorrectas")
     }

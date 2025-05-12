@@ -18,7 +18,6 @@ export async function omab_CrearMascota(data) {
 export async function omab_ActualizarMascota(id, data) {
   const res = await fetch(`${API_URL}/omab_mascota/${id}`, {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
     body: data
   });
   return await res.json();
