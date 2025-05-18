@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', async function() {
   
   if (!omab_mascotaId) {
     alert('No se ha especificado una mascota para consultar');
-    window.location.href = 'mascotas.html';
     return;
   }
 
@@ -63,7 +62,7 @@ function omab_mostrarDatosMascota(omab_mascota) {
   
   if (omab_mascota.foto) {
     omab_previewImagen.innerHTML = `
-      <img src="http://localhost:3000${omab_mascota.foto}" alt="Foto de ${omab_mascota.nombre}" class="imagen-preview">
+      <img src="http://192.168.50.35:3000${omab_mascota.foto}" alt="Foto de ${omab_mascota.nombre}" class="imagen-preview">
     `;
   } else {
     omab_previewImagen.innerHTML = `

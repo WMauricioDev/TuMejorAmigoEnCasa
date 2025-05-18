@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.1.112:3000';
+const API_URL = 'http://localhost:3000';
 
 export async function omab_ObtenerCategorias() {
   const res = await fetch(`${API_URL}/omab_categoria`);

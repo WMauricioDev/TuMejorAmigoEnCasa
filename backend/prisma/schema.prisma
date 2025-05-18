@@ -58,6 +58,8 @@ model Mascotas{
   genero_id Int
   foto String? @db.VarChar(64)
   estado Estado @default(Disponible)
+  latitud Decimal?
+  longitud Decimal?
   categoria Categorias @relation(fields: [categoria_id], references: [id]) 
   usuario   Usuarios   @relation(fields: [usuario_id], references: [id])
   raza Raza @relation(fields: [raza_id], references: [id])

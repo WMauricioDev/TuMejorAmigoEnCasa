@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   async function omab_fetchMascotasDisponibles() {
     try {
-      const omab_response = await fetch('http://192.168.1.112:3000/omab_mascotas-disponibles');
+      const omab_response = await fetch('http://192.168.50.35:3000/omab_mascotas-disponibles');
       if (!omab_response.ok) throw new Error('Error al obtener el reporte de mascotas');
 
       const omab_contentType = omab_response.headers.get('content-type');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   async function omab_fetchCantidadMascotasPorCategoria() {
     try {
-      const omab_response = await fetch('http://192.168.1.112:3000/omab_reportePorCategoria');
+      const omab_response = await fetch('http:/192.168.50.35:3000/omab_reportePorCategoria');
       if (!omab_response.ok) throw new Error('Error al obtener el reporte de categorías');
 
       const omab_contentType = omab_response.headers.get('content-type');

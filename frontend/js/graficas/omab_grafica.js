@@ -1,4 +1,4 @@
-fetch('http://192.168.1.112:3000/omab_reportePorCategoriaGrafica')
+fetch('http://192.168.50.35:3000/omab_reportePorCategoriaGrafica')
   .then(omab_res => omab_res.json())
   .then(omab_datos => {
     console.log(omab_datos);
@@ -32,7 +32,7 @@ fetch('http://192.168.1.112:3000/omab_reportePorCategoriaGrafica')
   .catch(omab_error => console.error('Error al cargar los datos:', omab_error));
 
 document.addEventListener('DOMContentLoaded', () => {
-  fetch('http://192.168.1.112:3000/omab_reporteMascotasDisponibleGrafica')
+  fetch('http://192.168.50.35:3000/omab_reporteMascotasDisponibleGrafica')
     .then(omab_res => omab_res.json())
     .then(omab_data => {
       console.log(omab_data);

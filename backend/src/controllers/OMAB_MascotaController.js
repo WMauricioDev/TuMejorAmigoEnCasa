@@ -5,10 +5,9 @@ export const omab_postMascota = async (req, res) => {
     console.log("BODY:", req.body);
     console.log("FILE:", req.file);
 
-    const { nombre, categoria_id, raza_id, genero_id } = req.body;
-    // Modificamos la línea donde se guarda la foto para usar la ruta accesible
-    const foto = req.file ? `/media/${req.file.filename}` : null; // Ruta pública de la imagen
-    
+    const { nombre, categoria_id, raza_id, genero_id, latitud, longitud } = req.body;
+    const foto = req.file ? `/media/${req.file.filename}` : null; 
+
     const omab_mascota = await omab_prisma.mascotas.create({
       data: {
         nombre,
@@ -16,27 +15,36 @@ export const omab_postMascota = async (req, res) => {
         raza_id: parseInt(raza_id),
         genero_id: parseInt(genero_id),
         foto,
-        usuario_id: 1,  // Puedes cambiar el id del usuario según el contexto
+        usuario_id: 1, 
         estado: 'Disponible',
+        latitud: latitud ? parseFloat(latitud) : null,
+        longitud: longitud ? parseFloat(longitud) : null,
       },
     });
 
     res.status(200).json({ message: "Mascota creada exitosamente", omab_mascota });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error al registrar mascotas" });
+    res.status(500).json({ error: "Error al registrar mascotas", error });
   }
 };
 
 
-export const omab_getMascota = async(req,res)=>{
-    try {
-        const omab_mascota = await omab_prisma.mascotas.findMany()
-        res.status(200).json({message: "Mascota:", omab_mascota})
-    } catch (error) {
-        res.status(500).json({error: "Error al obtener mascotas"})
-    }
-}
+export const omab_getMascota = async (req, res) => {
+  try {
+    const omab_mascota = await omab_prisma.mascotas.findMany({
+      include: {
+        categoria: true,
+        raza: true,
+        genero: true
+      }
+    });
+    res.status(200).json({ message: "Mascota:", omab_mascota });
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener mascotas", error });
+  }
+};
+
 
 export const omab_putMascota = async (req, res) => {
   try {

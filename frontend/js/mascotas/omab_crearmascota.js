@@ -26,35 +26,40 @@ document.addEventListener('DOMContentLoaded', async function() {
   });
 
   omab_form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    
-    if (!omab_form.nombre.value || !omab_selectRaza.value || !omab_selectCategoria.value || !omab_selectGenero.value) {
-      alert('Por favor complete todos los campos requeridos');
-      return;
-    }
+  e.preventDefault();
+  
+  if (!omab_form.nombre.value || !omab_selectRaza.value || !omab_selectCategoria.value || !omab_selectGenero.value
+      || !omab_form.latitud.value || !omab_form.longitud.value) {
+    alert('Por favor complete todos los campos requeridos, incluyendo latitud y longitud');
+    return;
+  }
 
-    const omab_formData = new FormData();
-    omab_formData.append('nombre', omab_form.nombre.value);
-    omab_formData.append('raza_id', omab_selectRaza.value);
-    omab_formData.append('categoria_id', omab_selectCategoria.value);
-    omab_formData.append('genero_id', omab_selectGenero.value);
-    
-    if (omab_imagenInput.files[0]) {
-      omab_formData.append('foto', omab_imagenInput.files[0]);
+  const omab_formData = new FormData();
+  omab_formData.append('nombre', omab_form.nombre.value);
+  omab_formData.append('raza_id', omab_selectRaza.value);
+  omab_formData.append('categoria_id', omab_selectCategoria.value);
+  omab_formData.append('genero_id', omab_selectGenero.value);
+    omab_formData.append('latitud', omab_form.latitud.value);
+  omab_formData.append('longitud', omab_form.longitud.value);
+
+  if (omab_imagenInput.files[0]) {
+    omab_formData.append('foto', omab_imagenInput.files[0]);
+  }
+  
+  try {
+    const omab_resultado = await omab_CrearMascota(omab_formData);
+    if (omab_resultado.success) {
+      alert('Mascota registrada con éxito');
+      omab_form.reset();
+      omab_previewImagen.innerHTML = `<img src="../../assets/icon-camera.svg" alt="Foto de mascota" class="icono-camara">`;
+    } else {
+      alert('Mensaje: ' + (omab_resultado.message || ''));
     }
-    
-    try {
-      const omab_resultado = await omab_CrearMascota(omab_formData);
-      if (omab_resultado.success) {
-        alert('Mascota registrada con éxito');
-      } else {
-        alert('Mensaje: ' + (omab_resultado.message || ''));
-      }
-    } catch (error) {
-      console.error('Error:', error);
-      alert('Ocurrió un error al registrar la mascota');
-    }
-  });
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Ocurrió un error al registrar la mascota');
+  }
+});
 
   async function omab_cargarOpcionesSelects() {
     try {

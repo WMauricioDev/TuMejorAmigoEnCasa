@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.1.112:3000';
+const API_URL = 'http://192.168.1.115:3000';
 
 export async function omab_obtenerUsuario() {
   const res = await fetch(`${API_URL}/omab_usuario`);
